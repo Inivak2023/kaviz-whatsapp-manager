@@ -41,6 +41,18 @@ function createWindow() {
     mainWindow.webContents.send('update_downloaded');
   });
 
+  autoUpdater.on('error', (err) => {
+    mainWindow.webContents.send('update_error', err.toString());
+  });
+
+  autoUpdater.on('checking-for-update', () => {
+    mainWindow.webContents.send('checking_update');
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    mainWindow.webContents.send('update_not_available');
+  });
+
   // Check for updates shortly after startup
   setTimeout(() => {
     autoUpdater.checkForUpdatesAndNotify();

@@ -38,6 +38,7 @@ const ctxRemoveBtn  = document.getElementById('ctx-remove-btn');
 const updateNotif   = document.getElementById('update-notification');
 const updateMsg     = document.getElementById('update-message');
 const updateAction  = document.getElementById('update-action-btn');
+const manualUpdateBtn = document.getElementById('manual-update-btn');
 
 // ── Init ─────────────────────────────────────────────────
 function init() {
@@ -236,6 +237,25 @@ document.addEventListener('keydown', (e) => {
 // ── Auto Update ──────────────────────────────────────────
 ipcRenderer.on('app_version', (_, version) => {
   document.getElementById('app-version').textContent = 'v' + version;
+});
+
+manualUpdateBtn.addEventListener('click', () => {
+  ipcRenderer.send('check_update');
+});
+
+ipcRenderer.on('checking_update', () => {
+  updateMsg.innerText = 'Checking for updates...';
+  updateAction.classList.add('hidden');
+  updateNotif.classList.remove('hidden');
+});
+
+ipcRenderer.on('update_not_available', () => {
+  updateMsg.innerText = 'You are on the latest version.';
+  setTimeout(() => updateNotif.classList.add('hidden'), 3000);
+});
+
+ipcRenderer.on('update_error', (_, err) => {
+  updateMsg.innerText = 'Update error: ' + err;
 });
 
 ipcRenderer.on('update_available', () => {
