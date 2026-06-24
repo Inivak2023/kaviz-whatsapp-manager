@@ -234,6 +234,10 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ── Auto Update ──────────────────────────────────────────
+ipcRenderer.on('app_version', (_, version) => {
+  document.getElementById('app-version').textContent = 'v' + version;
+});
+
 ipcRenderer.on('update_available', () => {
   updateMsg.innerText = 'A new update is available. Downloading...';
   updateNotif.classList.remove('hidden');

@@ -27,6 +27,11 @@ function createWindow() {
   mainWindow.removeMenu();
   mainWindow.loadFile('index.html');
 
+  // Send app version to renderer once ready
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('app_version', app.getVersion());
+  });
+
   // Auto-updater events
   autoUpdater.on('update-available', () => {
     mainWindow.webContents.send('update_available');
