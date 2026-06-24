@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="titlebar">
+    <div class="titlebar-title"><span class="brand">Kaviz</span> Whatsapp Manager</div>
+  </div>
+
+  <!-- Update Notification Bar -->
+  <div id="update-notification" class="update-notification hidden">
+    <div class="update-message" id="update-message">A new update is available. Downloading...</div>
+    <button id="update-action-btn" class="btn btn-primary btn-sm hidden">Restart to Update</button>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="app-logo">
+          <img src="logo.png" alt="Kaviz Logo" width="38" height="38" />
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div id="account-list" class="account-list">
+        <!-- Accounts will be dynamically added here -->
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-divider"></div>
+        <button id="add-account-btn" class="add-account-btn" title="Add WhatsApp Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 80 80" fill="none" width="80" height="80">
+            <circle cx="40" cy="40" r="40" fill="rgba(0,168,132,0.08)"/>
+            <path d="M20 52l3.75-11.25A17.5 17.5 0 1 1 30 57.5L20 52z" fill="url(#emptyGrad)"/>
+            <defs>
+              <linearGradient id="emptyGrad" x1="20" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#25D366"/>
+                <stop offset="1" stop-color="#00a884"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2>WhatsApp Manager</h2>
+        <p>Add your first account to get started</p>
+        <button class="empty-add-btn" id="empty-add-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Account
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="add-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <div>
+          <h3>Add New Account</h3>
+          <p>Enter a name to identify this account</p>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        <input type="text" id="account-name-input" placeholder="e.g. Personal, Work, Business..." autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button id="cancel-add-btn" class="btn btn-ghost">Cancel</button>
+        <button id="confirm-add-btn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Account
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Context Menu -->
+  <div id="context-menu" class="context-menu">
+    <button class="ctx-btn ctx-remove" id="ctx-remove-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6l-1 14H6L5 6"></path>
+        <path d="M10 11v6M14 11v6"></path>
+        <path d="M9 6V4h6v2"></path>
+      </svg>
+      Remove Account
+    </button>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
